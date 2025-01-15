@@ -22,8 +22,8 @@ func TestServiceRegisterUser(t *testing.T) {
 	repo := repository.NewUserRepository(db, ctx)
 	service := service.NewUserService(&repo, validattion)
 	req := &dto.UserRegisterRequestDto{
-		Name:     "test",
-		Email:    "test1@test.com",
+		Name:     "",
+		Email:    "",
 		Password: "test",
 	}
 	err := service.UserRegister(req)

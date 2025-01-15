@@ -22,7 +22,7 @@ func NewUserService(userRepository *repository.UserRepository, validator *valida
 }
 func (s *userImpl) UserRegister(req *dto.UserRegisterRequestDto) error {
 	if err := s.validator.Struct(req); err != nil {
-		return &exception.ValidationError{Message: err.Error()}
+		return err
 	}
 	count, err := s.userRepository.CountUser(&req.Email)
 	if err != nil {

@@ -34,7 +34,7 @@ func (r *userImpl) CountUser(email *string) (int, error) {
 		return 0, err
 	}
 	defer stmt.Close()
-	rows, err := stmt.QueryContext(r.ctx, email)
+	rows, err := stmt.QueryContext(r.ctx, &email)
 	if err != nil {
 		return 0, err
 	}
@@ -56,7 +56,7 @@ func (r *userImpl) GetUserByEmail(email *string) (*model.User, error) {
 		return nil, err
 	}
 	defer stmt.Close()
-	rows, err := stmt.QueryContext(r.ctx, *email)
+	rows, err := stmt.QueryContext(r.ctx, &email)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ func (r *userImpl) GetUserById(userId *string) (*model.User, error) {
 		return nil, err
 	}
 	defer stmt.Close()
-	rows, err := stmt.QueryContext(r.ctx, *userId)
+	rows, err := stmt.QueryContext(r.ctx, &userId)
 	if err != nil {
 		return nil, err
 	}

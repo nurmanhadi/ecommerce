@@ -21,4 +21,9 @@ func DiContainer(app *fiber.App) {
 	userServ := service.NewUserService(&userRepo, validation)
 	userCont := controller.NewUserController(&userServ)
 	routes.UserRoute(app, userCont)
+
+	productRepo := repository.NewProductRepository(db, ctx)
+	productServ := service.NewProductService(&productRepo, validation)
+	productCont := controller.NewProductController(&productServ)
+	routes.ProductRoute(app, productCont)
 }
