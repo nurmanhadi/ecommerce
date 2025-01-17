@@ -24,6 +24,6 @@ jwt:
   exp: 7
 
 midtrans:
-  merchant_id: G881300601
-  client_id: SB-Mid-client-Z-diJa6y6rD1qzzr
-  server_key: SB-Mid-server-IFPCNudjxBwU-tjuk6-EFXKp
+  merchant_id: 
+  client_id: 
+  server_key: 
