@@ -13,3 +13,9 @@ type ProductController interface {
 	UpdateProduct(c *fiber.Ctx) error
 	DeleteProduct(c *fiber.Ctx) error
 }
+type OrderController interface {
+	AddOrder(c *fiber.Ctx) error
+	GetOrders(c *fiber.Ctx) error
+	GetOrderById(c *fiber.Ctx) error
+	UpdateOrderStatus(c *fiber.Ctx) error
+}

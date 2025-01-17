@@ -49,6 +49,27 @@ func (r *userImpl) CountUser(email *string) (int, error) {
 	}
 	return count, nil
 }
+func (r *userImpl) CountUserById(userId *string) (int, error) {
+	stmt, err := r.db.PrepareContext(r.ctx, query.UserCountById)
+	if err != nil {
+		return 0, err
+	}
+	defer stmt.Close()
+	rows, err := stmt.QueryContext(r.ctx, &userId)
+	if err != nil {
+		return 0, err
+	}
+	defer rows.Close()
+	var count int
+	if rows.Next() {
+		if err := rows.Scan(&count); err != nil {
+			return 0, err
+		}
+	} else {
+		return 0, err
+	}
+	return count, nil
+}
 func (r *userImpl) GetUserByEmail(email *string) (*model.User, error) {
 	user := new(model.User)
 	stmt, err := r.db.PrepareContext(r.ctx, query.UserGetByEmail)

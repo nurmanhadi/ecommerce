@@ -20,5 +20,10 @@ database:
     conn_max_lifetime: 60
 
 jwt:
-  secret_key: oq283781979nx*(&*!(&*!BUITIUTUQTYW^!&!*!T&^!(@&)@_@Mouowiuiuw8279ntuqwq687168687))
-  expires_at: 7
+  key: KAJIIUiu8182(*&*^%64761*^)iwuyiqeyiwye8q76e82791nwydiauyduay72891671983718wuuqye
+  exp: 7
+
+midtrans:
+  merchant_id: G881300601
+  client_id: SB-Mid-client-Z-diJa6y6rD1qzzr
+  server_key: SB-Mid-server-IFPCNudjxBwU-tjuk6-EFXKp

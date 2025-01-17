@@ -2,7 +2,6 @@ package security
 
 import (
 	"ecommerce/config"
-	"ecommerce/pkg/infrastructure/exception"
 	"errors"
 	"time"
 
@@ -15,7 +14,7 @@ type claim struct {
 }
 
 func GenerateAccessToken(userId string) (string, error) {
-	exp := time.Now().Add((time.Hour * 24) * time.Duration(config.Viper.Jwt.ExpiresAt))
+	exp := time.Now().Add((time.Hour * 24) * time.Duration(config.Viper.Jwt.Exp))
 	claims := claim{
 		userId,
 		jwt.RegisteredClaims{
@@ -23,25 +22,22 @@ func GenerateAccessToken(userId string) (string, error) {
 		},
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	ss, err := token.SignedString([]byte(config.Viper.Jwt.SecretKey))
+	ss, err := token.SignedString([]byte(config.Viper.Jwt.Key))
 	if err != nil {
 		return "", err
 	}
 	return ss, nil
 }
-func VerifyJwt(accessToken string) (string, error) {
-	token, err := jwt.ParseWithClaims(accessToken, &claim{}, func(t *jwt.Token) (interface{}, error) {
-		return []byte(config.Viper.Jwt.SecretKey), nil
+func VerifyJwt(tokenString string) (string, error) {
+	token, err := jwt.ParseWithClaims(tokenString, &claim{}, func(t *jwt.Token) (interface{}, error) {
+		return []byte(config.Viper.Jwt.Key), nil
 	})
 	if err != nil {
-		return "", exception.JwtInvalidSignature
+		return "", err
 	}
 	claims, ok := token.Claims.(*claim)
 	if !ok {
 		return "", errors.New("undefined token")
-	}
-	if claims.ExpiresAt.Before(time.Now()) {
-		return "", exception.JwtExpired
 	}
 	return claims.Id, nil
 }

@@ -31,8 +31,13 @@ type appConfig struct {
 		}
 	}
 	Jwt struct {
-		SecretKey string
-		ExpiresAt int
+		Key string
+		Exp int
+	}
+	Midtrans struct {
+		MerchanId string
+		ClientId  string
+		ServerKey string
 	}
 }
 

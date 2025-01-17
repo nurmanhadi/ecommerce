@@ -23,9 +23,15 @@ func ResponseError(c *fiber.Ctx, err error) error {
 	if err != nil {
 		if errors.Is(err, exception.JwtExpired) {
 			return ErrorResponse(c, 401, err.Error())
+		} else if errors.Is(err, exception.AuthBearerReqired) {
+			return ErrorResponse(c, 401, err.Error())
+		} else if errors.Is(err, exception.AuthTokenIsNull) {
+			return ErrorResponse(c, 401, err.Error())
 		} else if errors.Is(err, exception.JwtInvalidSignature) {
 			return ErrorResponse(c, 401, err.Error())
 		} else if errors.Is(err, exception.UserEmailAlreadyExist) {
+			return ErrorResponse(c, 400, err.Error())
+		} else if errors.Is(err, exception.OrderStatusQueryIsRequired) {
 			return ErrorResponse(c, 400, err.Error())
 		} else if errors.Is(err, exception.UserEmailAndPasswordIsWrong) {
 			return ErrorResponse(c, 400, err.Error())
@@ -38,6 +44,10 @@ func ResponseError(c *fiber.Ctx, err error) error {
 			str := strings.Join(values, ", ")
 			return ErrorResponse(c, 400, str)
 		} else if errors.Is(err, exception.ProductNotFound) {
+			return ErrorResponse(c, 404, err.Error())
+		} else if errors.Is(err, exception.UserNotFound) {
+			return ErrorResponse(c, 404, err.Error())
+		} else if errors.Is(err, exception.OrderNotFound) {
 			return ErrorResponse(c, 404, err.Error())
 		} else {
 			return ErrorResponse(c, 500, "internal server error")

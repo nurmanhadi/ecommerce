@@ -1,12 +1,14 @@
 package unit
 
 import (
+	"ecommerce/config"
 	"ecommerce/pkg/infrastructure/security"
 	"fmt"
 	"testing"
 )
 
 func TestGenerateToken(t *testing.T) {
+	config.LoadConfig()
 	token, err := security.GenerateAccessToken("123")
 	if err != nil {
 		panic(err)
@@ -14,7 +16,8 @@ func TestGenerateToken(t *testing.T) {
 	fmt.Println(token)
 }
 func TestVerifyJwt(t *testing.T) {
-	token := "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEyMzM0IiwiZXhwIjoxNzM2ODY3NzY2fQ.kdTM-32lzq4_s0qCZUs_O0K36ew42eOcfmD201BnaFo"
+	config.LoadConfig()
+	token := "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEyMyIsImV4cCI6MTczNzA0Mjk1OH0.l-YsGdRZkq1lZnxPZs3zQzg2YkTbKlvQ-Kym4_HPE8o"
 	userId, err := security.VerifyJwt(token)
 	if err != nil {
 		panic(err)

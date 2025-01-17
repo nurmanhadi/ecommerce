@@ -16,3 +16,9 @@ type ProductService interface {
 	UpdateProduct(productId *string, req *dto.ProductUpdateRequestDto) error
 	DeleteProduct(productId *string) error
 }
+type OrderService interface {
+	AddOrder(userId *string, req *dto.OrderAddRequestDto) error
+	GetOrders(userId *string) ([]model.Order, error)
+	GetOrderById(orderId *string) (*model.Order, error)
+	UpdateOrderStatus(orderId *string, status *string) error
+}
