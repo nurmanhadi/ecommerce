@@ -1,0 +1,29 @@
+app:
+  name: ecommerce
+  version: 1.0.0
+
+server:
+  timeout: 5
+  port: 5000
+  prefork: true
+
+database:
+  mariadb:
+    host: localhost
+    port: 3306
+    user: root
+    password: admin
+    dbname: ecommerce
+    max_idle_conns: 10
+    max_open_conns: 100
+    conn_max_idle_time: 5
+    conn_max_lifetime: 60
+
+jwt:
+  key: KAJIIUiu8182(*&*^%64761*^)iwuyiqeyiwye8q76e82791nwydiauyduay72891671983718wuuqye
+  exp: 7
+
+midtrans:
+  merchant_id: 
+  client_id: 
+  server_key: 
