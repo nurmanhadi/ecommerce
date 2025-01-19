@@ -22,20 +22,20 @@ type orderImpl struct {
 func NewOrderService(orderRepository *repository.OrderRepository, productRepository *repository.ProductRepository, userRepository *repository.UserRepository, validator *validator.Validate) OrderService {
 	return &orderImpl{orderRepository: *orderRepository, productRepository: *productRepository, userRepository: *userRepository, validator: validator}
 }
-func (s *orderImpl) AddOrder(userId *string, req *dto.OrderAddRequestDto) error {
+func (s *orderImpl) AddOrder(userId *string, req *dto.OrderAddRequestDto) (map[string]interface{}, error) {
 	countUser, err := s.userRepository.CountUserById(userId)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	if countUser == 0 {
-		return exception.UserNotFound
+		return nil, exception.UserNotFound
 	}
 	product, err := s.productRepository.GetProductById(&req.ProductId)
 	if err != nil {
-		return exception.ProductNotFound
+		return nil, exception.ProductNotFound
 	}
 	if err := s.validator.Struct(req); err != nil {
-		return err
+		return nil, err
 	}
 	orderId := uuid.NewString()
 	order := &model.Order{
@@ -50,9 +50,9 @@ func (s *orderImpl) AddOrder(userId *string, req *dto.OrderAddRequestDto) error 
 	}
 	err = s.orderRepository.AddOrder(order)
 	if err != nil {
-		return err
+		return nil, err
 	}
-	return nil
+	return map[string]interface{}{"order_id": &orderId}, nil
 }
 func (s *orderImpl) GetOrders(userId *string) ([]model.Order, error) {
 	countUser, err := s.userRepository.CountUserById(userId)

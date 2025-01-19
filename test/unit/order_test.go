@@ -27,10 +27,11 @@ func TestOrderAdd(t *testing.T) {
 		ProductId: 6,
 		Quantity:  5,
 	}
-	err := serv.AddOrder(&userId, order)
+	id, err := serv.AddOrder(&userId, order)
 	if err != nil {
 		panic(err)
 	}
+	fmt.Println(id)
 }
 func TestOrderGetAll(t *testing.T) {
 	config.LoadConfig()

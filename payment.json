@@ -1,0 +1,15 @@
+{
+    "transaction_time": "2023-11-15 18:45:13",
+    "transaction_status": "settlement",
+    "transaction_id": "513f1f01-c9da-474c-9fc9-d5c64364b709",
+    "status_message": "midtrans payment notification",
+    "status_code": "200",
+    "signature_key": "8d7deb3885bbfbfe9a1148e55ecd29fee865b4dc30f4caf2198dc8cf1394eac2e6592cd14095dbe69c75a50500f938ebec222f9bf3c4f7b504ab215e28c17761",
+    "settlement_time": "2023-11-15 22:45:13",
+    "payment_type": "gopay",
+    "order_id": "payment_notif_test_G881300601_82181d5b-2758-408c-b635-abef851ca42b",
+    "merchant_id": "G881300601",
+    "gross_amount": "105000.00",
+    "fraud_status": "accept",
+    "currency": "IDR"
+}

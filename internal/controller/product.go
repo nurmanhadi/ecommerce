@@ -35,10 +35,11 @@ func (h *productImpl) AddProduct(c *fiber.Ctx) error {
 	if err := c.BodyParser(&req); err != nil {
 		return response.ErrorResponse(c, 400, err.Error())
 	}
-	if err := h.productService.AddProduct(req); err != nil {
+	product, err := h.productService.AddProduct(req)
+	if err != nil {
 		return response.ResponseError(c, err)
 	}
-	return response.ResponseSuccess(c, 201, nil)
+	return response.ResponseSuccess(c, 201, product)
 }
 func (h *productImpl) UpdateProduct(c *fiber.Ctx) error {
 	productId := c.Params("productId")

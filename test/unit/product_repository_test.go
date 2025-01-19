@@ -6,6 +6,7 @@ import (
 	"ecommerce/internal/repository"
 	"ecommerce/pkg/infrastructure/database/mariadb"
 	"ecommerce/pkg/infrastructure/dto"
+	"fmt"
 	"testing"
 	"time"
 )
@@ -23,10 +24,11 @@ func TestProductAdd(t *testing.T) {
 		CreatedAt:   time.Now(),
 		UpdatedAt:   time.Now(),
 	}
-	err := repo.AddProduct(&product)
+	id, err := repo.AddProduct(&product)
 	if err != nil {
 		panic(err)
 	}
+	fmt.Println(id)
 }
 func TestProductUpdate(t *testing.T) {
 	config.LoadConfig()

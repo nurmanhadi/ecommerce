@@ -45,6 +45,8 @@ func ResponseError(c *fiber.Ctx, err error) error {
 			return ErrorResponse(c, 400, str)
 		} else if errors.Is(err, exception.ProductNotFound) {
 			return ErrorResponse(c, 404, err.Error())
+		} else if errors.Is(err, exception.PaymentNotFound) {
+			return ErrorResponse(c, 404, err.Error())
 		} else if errors.Is(err, exception.UserNotFound) {
 			return ErrorResponse(c, 404, err.Error())
 		} else if errors.Is(err, exception.OrderNotFound) {

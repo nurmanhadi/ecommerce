@@ -39,9 +39,9 @@ func (s *productImpl) GetProductById(productId *string) (*model.Product, error) 
 	}
 	return product, nil
 }
-func (s *productImpl) AddProduct(req *dto.ProductAddRequestDto) error {
+func (s *productImpl) AddProduct(req *dto.ProductAddRequestDto) (map[string]interface{}, error) {
 	if err := s.validator.Struct(req); err != nil {
-		return err
+		return nil, err
 	}
 	product := &model.Product{
 		Name:        req.Name,
@@ -51,10 +51,13 @@ func (s *productImpl) AddProduct(req *dto.ProductAddRequestDto) error {
 		CreatedAt:   time.Now(),
 		UpdatedAt:   time.Now(),
 	}
-	if err := s.productRepository.AddProduct(product); err != nil {
-		return err
+	id, err := s.productRepository.AddProduct(product)
+	if err != nil {
+		return nil, err
 	}
-	return nil
+	return map[string]interface{}{
+		"product_id": id,
+	}, nil
 }
 func (s *productImpl) UpdateProduct(productId *string, req *dto.ProductUpdateRequestDto) error {
 	convertId, err := strconv.ParseInt(*productId, 10, 32)

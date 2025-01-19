@@ -18,17 +18,21 @@ type productImpl struct {
 func NewProductRepository(db *sql.DB, ctx context.Context) ProductRepository {
 	return &productImpl{db: db, ctx: ctx}
 }
-func (r *productImpl) AddProduct(product *model.Product) error {
+func (r *productImpl) AddProduct(product *model.Product) (int64, error) {
 	stmt, err := r.db.PrepareContext(r.ctx, query.ProductAdd)
 	if err != nil {
-		return err
+		return 0, err
 	}
 	defer stmt.Close()
-	_, err = stmt.ExecContext(r.ctx, &product.Name, &product.Description, &product.Price, &product.Stock, &product.CreatedAt, &product.UpdatedAt)
+	result, err := stmt.ExecContext(r.ctx, &product.Name, &product.Description, &product.Price, &product.Stock, &product.CreatedAt, &product.UpdatedAt)
 	if err != nil {
-		return err
+		return 0, err
 	}
-	return nil
+	id, err := result.LastInsertId()
+	if err != nil {
+		return 0, err
+	}
+	return id, nil
 }
 func (r *productImpl) GetProductById(productId *int) (*model.Product, error) {
 	product := new(model.Product)

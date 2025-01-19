@@ -3,6 +3,7 @@ package repository
 import (
 	"ecommerce/internal/model"
 	"ecommerce/pkg/infrastructure/dto"
+	"time"
 )
 
 type UserRepository interface {
@@ -13,7 +14,7 @@ type UserRepository interface {
 	CountUserById(userId *string) (int, error)
 }
 type ProductRepository interface {
-	AddProduct(product *model.Product) error
+	AddProduct(product *model.Product) (int64, error)
 	GetProductById(productId *int) (*model.Product, error)
 	UpdateProduct(productId *int, product *dto.ProductUpdateRequestDto) error
 	DeleteProduct(productId *int) error
@@ -26,4 +27,10 @@ type OrderRepository interface {
 	GetOrderById(orderId *string) (*model.Order, error)
 	UpdateOrderStatus(orderId *string, status *string) error
 	CountOrder(orderId *string) (int, error)
+}
+type PaymentRepository interface {
+	AddPayment(payment *model.Payment) error
+	UpdateStatus(settlementTime *time.Time, status *string, orderId *string) error
+	CountPayment(orderId *string) (int, error)
+	GetPaymentByOrderId(orderId *string) (*model.Payment, error)
 }

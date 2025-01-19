@@ -19,3 +19,13 @@ type OrderController interface {
 	GetOrderById(c *fiber.Ctx) error
 	UpdateOrderStatus(c *fiber.Ctx) error
 }
+type TransactionController interface {
+	CheckTrasaction(c *fiber.Ctx) error
+	AddTrasaction(c *fiber.Ctx) error
+}
+type NotificationController interface {
+	AddPaymentOrUpdateStatus(c *fiber.Ctx) error
+}
+type PaymentController interface {
+	GetPaymentByOrderId(c *fiber.Ctx) error
+}

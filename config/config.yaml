@@ -24,6 +24,4 @@ jwt:
   exp: 7
 
 midtrans:
-  merchant_id: 
-  client_id: 
-  server_key: 
+  key: SB-Mid-server-IFPCNudjxBwU-tjuk6-EFXKp

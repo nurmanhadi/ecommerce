@@ -24,11 +24,11 @@ func (h *orderImpl) AddOrder(c *fiber.Ctx) error {
 	if err := c.BodyParser(&req); err != nil {
 		response.ErrorResponse(c, 400, err.Error())
 	}
-	err := h.orderService.AddOrder(&userId, req)
+	order, err := h.orderService.AddOrder(&userId, req)
 	if err != nil {
 		return response.ResponseError(c, err)
 	}
-	return response.ResponseSuccess(c, 201, nil)
+	return response.ResponseSuccess(c, 201, order)
 }
 func (h *orderImpl) GetOrders(c *fiber.Ctx) error {
 	userId, ok := c.Locals("userId").(string)

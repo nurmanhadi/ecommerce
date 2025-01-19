@@ -35,9 +35,7 @@ type appConfig struct {
 		Exp int
 	}
 	Midtrans struct {
-		MerchanId string
-		ClientId  string
-		ServerKey string
+		Key string
 	}
 }
 
