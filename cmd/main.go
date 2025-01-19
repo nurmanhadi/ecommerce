@@ -24,5 +24,6 @@ func main() {
 	app.Use(logger.New())
 	di.DiContainer(app)
 	log.Printf("version %s", config.Viper.App.Version)
+	log.Printf("Author %s", config.Viper.App.Author)
 	app.Listen(fmt.Sprintf(":%d", config.Viper.Server.Port))
 }

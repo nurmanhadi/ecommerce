@@ -1,6 +1,15 @@
 app:
   name: ecommerce
   version: 1.0.0
+  author: Nurman Hadi
+  sosial_media:
+    github: https://github.com/nurmanhadi
+    instagram: https://www.instagram.com/nurman00003
+    linkedin: https://www.linkedin.com/in/nurman-hadi03
+    tiktok: https://www.tiktok.com/@manzz__3
+    facebook: https://www.facebook.com/nurmanHadi03
+    email: nurman.hadi@hotmail.com
+    youtube: https://www.youtube.com/@nurmanhadi2457
 
 server:
   timeout: 5

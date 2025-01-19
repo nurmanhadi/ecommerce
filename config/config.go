@@ -9,8 +9,18 @@ import (
 
 type appConfig struct {
 	App struct {
-		Name    string
-		Version string
+		Name        string
+		Version     string
+		Author      string
+		SosialMedia struct {
+			Github    string
+			Instagram string
+			Linkedin  string
+			Tiktok    string
+			Facebook  string
+			Email     string
+			Youtube   string
+		}
 	}
 	Server struct {
 		Timeout int
